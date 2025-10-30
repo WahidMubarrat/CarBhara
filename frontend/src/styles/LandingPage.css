@@ -1,0 +1,39 @@
+.landing-container {
+  background-color: #000;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.landing-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: yellow;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+}
+
+.landing-btn {
+  background-color: yellow;
+  color: black;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.landing-btn:hover {
+  background-color: #f5d742;
+  transform: scale(1.05);
+}
