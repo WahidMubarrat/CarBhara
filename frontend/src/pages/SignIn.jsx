@@ -1,19 +1,42 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signin } from "../services/authService";
 import "../styles/SignIn.css";
 
 const SignIn = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Signing in as: ${form.email}`);
+    setLoading(true);
+    setError("");
+
+    try {
+      const data = await signin(form.email, form.password);
+      
+      if (data.message === "Login successful") {
+        // Redirect based on user role
+        if (data.user.role === "customer") {
+          navigate("/customer/profile");
+        } else {
+          navigate("/business/profile");
+        }
+      } else {
+        setError(data.message || "Login failed");
+      }
+    } catch (err) {
+      setError("Failed to connect to server");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,6 +46,8 @@ const SignIn = () => {
         <p className="signin-subtitle">Sign in to continue</p>
 
         <form className="signin-form" onSubmit={handleSubmit}>
+          {error && <div className="error-message">{error}</div>}
+          
           <input
             type="email"
             name="email"
@@ -30,6 +55,7 @@ const SignIn = () => {
             value={form.email}
             onChange={handleChange}
             required
+            disabled={loading}
           />
           <input
             type="password"
@@ -38,9 +64,10 @@ const SignIn = () => {
             value={form.password}
             onChange={handleChange}
             required
+            disabled={loading}
           />
-          <button type="submit" className="signin-btn">
-            Sign In
+          <button type="submit" className="signin-btn" disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
       </div>

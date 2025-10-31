@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/SignUp.css";
+import { signup } from "../services/authService";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -10,16 +11,61 @@ const SignUp = () => {
     age: "",
     address: "",
     phone: "",
-    role: "user",
+    role: "customer", // match backend: "customer" or "businessman"
+    companyName: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Signed up as ${form.fullname} (${form.role})`);
+
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    const payload = {
+      role: form.role,
+      fullname: form.fullname,
+      email: form.email,
+      password: form.password,
+      age: form.age ? Number(form.age) : undefined,
+      address: form.address,
+      phone: form.phone,
+      companyName: form.role === "businessman" ? form.companyName : undefined,
+    };
+
+    try {
+      setLoading(true);
+      const res = await signup(payload);
+
+      if (res && res.message === "Signup successful") {
+        alert("Signup successful — you can now sign in");
+        setForm({
+          fullname: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          age: "",
+          address: "",
+          phone: "",
+          role: "customer",
+          companyName: "",
+        });
+      } else {
+        setError(res?.message || "Signup failed");
+      }
+    } catch (err) {
+      setError(err.message || "Signup failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,6 +75,8 @@ const SignUp = () => {
         <p className="signup-subtitle">Join RentEase today</p>
 
         <form className="signup-form" onSubmit={handleSubmit}>
+          {error && <div className="form-error">{error}</div>}
+
           <div className="form-group">
             <input
               type="text"
@@ -71,10 +119,9 @@ const SignUp = () => {
             <input
               type="number"
               name="age"
-              placeholder="Age"
+              placeholder="Age (optional)"
               value={form.age}
               onChange={handleChange}
-              required
             />
             <input
               type="tel"
@@ -82,7 +129,6 @@ const SignUp = () => {
               placeholder="Phone"
               value={form.phone}
               onChange={handleChange}
-              required
             />
           </div>
 
@@ -92,7 +138,6 @@ const SignUp = () => {
             rows="3"
             value={form.address}
             onChange={handleChange}
-            required
           />
 
           <select
@@ -101,12 +146,23 @@ const SignUp = () => {
             onChange={handleChange}
             required
           >
-            <option value="user">User</option>
-            <option value="business">Business Owner</option>
+            <option value="customer">Customer</option>
+            <option value="businessman">Business Owner</option>
           </select>
 
-          <button type="submit" className="signup-btn">
-            Sign Up
+          {form.role === "businessman" && (
+            <input
+              type="text"
+              name="companyName"
+              placeholder="Company Name"
+              value={form.companyName}
+              onChange={handleChange}
+              required
+            />
+          )}
+
+          <button type="submit" className="signup-btn" disabled={loading}>
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
       </div>

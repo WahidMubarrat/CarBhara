@@ -1,0 +1,59 @@
+.business-navbar {
+  background: #1a1a1a;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.business-navbar-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text {
+  color: #f1c40f;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.portal-text {
+  color: #ffffff;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: -3px;
+}
+
+.business-navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.business-nav-btn {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.business-nav-btn:hover {
+  background: rgba(241, 196, 15, 0.1);
+  color: #f1c40f;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
