@@ -1,16 +1,84 @@
+import { useState, useEffect } from "react";
 import BusinessNavbar from "../../components/BusinessNavbar";
-import "../../styles/BusinessProfile.css";
+import "../../styles/Businessman/BusinessProfile.css";
+import { getUserProfile, updateUserProfile } from "../../services/userService";
 
 const BusinessProfile = () => {
-  // Example business data (replace with real data from context/API)
-  const businessData = {
-    fullname: "John Doe",
-    companyName: "Premium Cars Ltd",
-    email: "john@premiumcars.com",
-    phone: "+880 1234567890",
-    address: "123 Business District, Dhaka",
-    joinedDate: "October 2025"
+  const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [user, setUser] = useState({
+    fullname: "",
+    companyName: "",
+    email: "",
+    phone: "",
+    address: "",
+    role: "businessman"
+  });
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const fetchUserProfile = async () => {
+    try {
+      setLoading(true);
+      const data = await getUserProfile();
+      if (data.success && data.user) {
+        setUser(data.user);
+      } else {
+        setError(data.message || "Failed to load profile");
+      }
+    } catch (err) {
+      setError("Failed to load profile. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+    setError("");
+    setSuccessMessage("");
+  };
+
+  const handleSave = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      setSuccessMessage("");
+
+      const data = await updateUserProfile(user);
+      
+      if (data.success) {
+        setSuccessMessage("Profile updated successfully!");
+        setIsEditing(false);
+      } else {
+        setError(data.message || "Failed to update profile");
+      }
+    } catch (err) {
+      setError("Failed to update profile. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading && !user.email) {
+    return (
+      <div className="business-layout">
+        <BusinessNavbar />
+        <div className="business-profile-container">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="business-layout">
@@ -18,44 +86,110 @@ const BusinessProfile = () => {
       <div className="business-profile-container">
         <h1>Business Profile</h1>
         
+        {error && <div className="error-message">{error}</div>}
+        {successMessage && <div className="success-message">{successMessage}</div>}
+        
         <div className="profile-card">
           <div className="profile-header">
             <div className="company-avatar">
-              {businessData.companyName[0]}
+              {user.companyName?.[0] || "B"}
             </div>
-            <h2>{businessData.companyName}</h2>
+            <h2>{user.companyName || "Your Company"}</h2>
           </div>
 
           <div className="profile-details">
             <div className="detail-group">
               <label>Owner Name</label>
-              <p>{businessData.fullname}</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="fullname"
+                  value={user.fullname}
+                  onChange={handleChange}
+                  className="edit-input"
+                />
+              ) : (
+                <p>{user.fullname}</p>
+              )}
+            </div>
+
+            <div className="detail-group">
+              <label>Company Name</label>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="companyName"
+                  value={user.companyName}
+                  onChange={handleChange}
+                  className="edit-input"
+                />
+              ) : (
+                <p>{user.companyName}</p>
+              )}
             </div>
 
             <div className="detail-group">
               <label>Email</label>
-              <p>{businessData.email}</p>
+              <p>{user.email}</p>
             </div>
 
             <div className="detail-group">
               <label>Phone</label>
-              <p>{businessData.phone}</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="phone"
+                  value={user.phone}
+                  onChange={handleChange}
+                  className="edit-input"
+                />
+              ) : (
+                <p>{user.phone}</p>
+              )}
             </div>
 
             <div className="detail-group">
               <label>Address</label>
-              <p>{businessData.address}</p>
-            </div>
-
-            <div className="detail-group">
-              <label>Member Since</label>
-              <p>{businessData.joinedDate}</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="address"
+                  value={user.address}
+                  onChange={handleChange}
+                  className="edit-input"
+                />
+              ) : (
+                <p>{user.address}</p>
+              )}
             </div>
           </div>
 
-          <button className="edit-profile-btn">
-            Edit Profile
-          </button>
+          {isEditing ? (
+            <div className="profile-actions">
+              <button 
+                className="save-profile-btn" 
+                onClick={handleSave}
+                disabled={loading}
+              >
+                {loading ? "Saving..." : "Save Changes"}
+              </button>
+              <button 
+                className="cancel-edit-btn" 
+                onClick={handleEditToggle}
+                disabled={loading}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button 
+              className="edit-profile-btn"
+              onClick={handleEditToggle}
+              disabled={loading}
+            >
+              Edit Profile
+            </button>
+          )}
         </div>
       </div>
     </div>

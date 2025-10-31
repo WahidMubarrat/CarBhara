@@ -1,5 +1,5 @@
 import BusinessNavbar from "../../components/BusinessNavbar";
-import "../../styles/BusinessBookings.css";
+import "../../styles/Businessman/BusinessBookings.css";
 
 const BusinessBookings = () => {
   // Example booking requests (replace with real data from API)

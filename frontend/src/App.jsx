@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Public pages
 import LandingPage from "./pages/LandingPage";
@@ -25,15 +26,67 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
 
       {/* Customer routes */}
-      <Route path="/customer/profile" element={<Profile />} />
-      <Route path="/customer/collection" element={<ViewCollection />} />
-      <Route path="/customer/booking" element={<MakeBooking />} />
-      <Route path="/customer/recharge" element={<Recharge />} />
+      <Route 
+        path="/customer/profile" 
+        element={
+          <ProtectedRoute allowedRole="customer">
+            <Profile />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/customer/collection" 
+        element={
+          <ProtectedRoute allowedRole="customer">
+            <ViewCollection />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/customer/booking" 
+        element={
+          <ProtectedRoute allowedRole="customer">
+            <MakeBooking />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/customer/recharge" 
+        element={
+          <ProtectedRoute allowedRole="customer">
+            <Recharge />
+          </ProtectedRoute>
+        } 
+      />
 
       {/* Business routes */}
-      <Route path="/business/profile" element={<BusinessProfile />} />
-      <Route path="/business/cars" element={<BusinessCars />} />
-      <Route path="/business/bookings" element={<BusinessBookings />} />
+      <Route 
+        path="/business/profile" 
+        element={
+          <ProtectedRoute allowedRole="businessman">
+            <BusinessProfile />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/business/cars" 
+        element={
+          <ProtectedRoute allowedRole="businessman">
+            <BusinessCars />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/business/bookings" 
+        element={
+          <ProtectedRoute allowedRole="businessman">
+            <BusinessBookings />
+          </ProtectedRoute>
+        } 
+      />
+
+      {/* Catch all route */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

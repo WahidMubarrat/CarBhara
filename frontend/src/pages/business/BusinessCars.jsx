@@ -1,5 +1,5 @@
 import BusinessNavbar from "../../components/BusinessNavbar";
-import "../../styles/BusinessCars.css";
+import "../../styles/Businessman/BusinessCars.css";
 
 const BusinessCars = () => {
   // Example car collection data (replace with real data from API)

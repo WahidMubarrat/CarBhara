@@ -22,12 +22,15 @@ const SignIn = () => {
     try {
       const data = await signin(form.email, form.password);
       
-      if (data.message === "Login successful") {
+      if (data.success || data.message === "Login successful") {
+        const user = data.user;
         // Redirect based on user role
-        if (data.user.role === "customer") {
+        if (user.role === "customer") {
           navigate("/customer/profile");
-        } else {
+        } else if (user.role === "businessman") {
           navigate("/business/profile");
+        } else {
+          setError("Invalid user role");
         }
       } else {
         setError(data.message || "Login failed");
