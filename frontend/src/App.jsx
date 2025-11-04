@@ -14,6 +14,7 @@ import Recharge from "./pages/customer/Recharge";
 
 // Business pages
 import BusinessProfile from "./pages/business/BusinessProfile";
+import BusinessViewCollection from "./pages/business/ViewCollection";
 import BusinessCars from "./pages/business/BusinessCars";
 import BusinessBookings from "./pages/business/BusinessBookings";
 
@@ -65,6 +66,14 @@ function App() {
         element={
           <ProtectedRoute allowedRole="businessman">
             <BusinessProfile />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/business/collection" 
+        element={
+          <ProtectedRoute allowedRole="businessman">
+            <BusinessViewCollection />
           </ProtectedRoute>
         } 
       />

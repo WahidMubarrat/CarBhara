@@ -8,6 +8,7 @@ const customerSchema = new mongoose.Schema(
     age: { type: Number },
     address: { type: String },
     phone: { type: String },
+    profilePicture: { type: String, default: '' }, // URL to Cloudinary image
   },
   { timestamps: true }
 );

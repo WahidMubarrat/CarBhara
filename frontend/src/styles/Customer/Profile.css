@@ -31,6 +31,42 @@
   flex-direction: column;
 }
 
+.profile-picture-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f6c90e;
+  margin-bottom: 10px;
+}
+
+.profile-picture-upload {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.upload-btn {
+  background-color: transparent;
+  color: #f6c90e;
+  border: 1px solid #f6c90e;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #f6c90e;
+  color: #000;
+}
+
 .profile-form label {
   font-size: 1rem;
   margin-top: 12px;
@@ -57,9 +93,10 @@
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
-.edit-btn, .save-btn {
+.edit-btn, .save-btn, .password-btn {
   background-color: #f6c90e;
   color: #000;
   border: none;
@@ -68,6 +105,19 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
+  min-width: 150px;
+}
+
+.password-btn {
+  background-color: transparent;
+  color: #f6c90e;
+  border: 1px solid #f6c90e;
+}
+
+.password-btn:hover:not(:disabled) {
+  background-color: #f6c90e;
+  color: #000;
 }
 
 .edit-btn:hover:not(:disabled), 
@@ -76,7 +126,8 @@
 }
 
 .edit-btn:disabled, 
-.save-btn:disabled {
+.save-btn:disabled,
+.password-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }

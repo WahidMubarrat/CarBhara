@@ -1,10 +1,22 @@
 const API_BASE = import.meta.env?.VITE_API_URL || "http://localhost:5000";
 
 export async function signup(data) {
+  const headers = {};
+  let body;
+  
+  // If data is FormData (for file uploads), don't set Content-Type
+  // The browser will set it automatically with the correct boundary
+  if (data instanceof FormData) {
+    body = data;
+  } else {
+    headers['Content-Type'] = 'application/json';
+    body = JSON.stringify(data);
+  }
+
   const res = await fetch(`${API_BASE}/api/auth/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    headers: headers,
+    body: body,
   });
   return await res.json();
 }

@@ -8,6 +8,7 @@ const businessmanSchema = new mongoose.Schema(
     companyName: { type: String },
     address: { type: String },
     phone: { type: String },
+    profilePicture: { type: String, default: '' }, // URL to Cloudinary image
   },
   { timestamps: true }
 );

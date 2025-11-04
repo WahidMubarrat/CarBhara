@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import { getCurrentUser } from "../services/authService";
 import "../styles/Customer/Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const user = getCurrentUser();
+  const isBusinessman = user?.role === "businessman";
 
   const handleLogout = () => {
     // Clear auth state and redirect
@@ -17,10 +20,20 @@ const Navbar = () => {
       <div className="navbar-brand">CarBhara</div>
 
       <div className="navbar-links">
-        <Link to="/customer/profile" className="nav-btn">Profile</Link>
-        <Link to="/customer/collection" className="nav-btn">View Collection</Link>
-        <Link to="/customer/booking" className="nav-btn">Make Booking</Link>
-        <Link to="/customer/recharge" className="nav-btn">Recharge</Link>
+        {isBusinessman ? (
+          <>
+            <Link to="/business/profile" className="nav-btn">Profile</Link>
+            <Link to="/business/collection" className="nav-btn">My Cars</Link>
+            <Link to="/business/bookings" className="nav-btn">Bookings</Link>
+          </>
+        ) : (
+          <>
+            <Link to="/customer/profile" className="nav-btn">Profile</Link>
+            <Link to="/customer/collection" className="nav-btn">View Collection</Link>
+            <Link to="/customer/booking" className="nav-btn">Make Booking</Link>
+            <Link to="/customer/recharge" className="nav-btn">Recharge</Link>
+          </>
+        )}
         <button className="nav-btn logout-btn" onClick={handleLogout}>
           Logout
         </button>

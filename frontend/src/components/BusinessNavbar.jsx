@@ -23,8 +23,8 @@ const BusinessNavbar = () => {
         <Link to="/business/profile" className="business-nav-btn">
           Profile
         </Link>
-        <Link to="/business/cars" className="business-nav-btn">
-          Car Collections
+        <Link to="/business/collection" className="business-nav-btn">
+          My Cars
         </Link>
         <Link to="/business/bookings" className="business-nav-btn">
           Booking Requests

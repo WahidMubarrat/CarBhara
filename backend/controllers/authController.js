@@ -2,10 +2,15 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Customer from "../models/Customer.js";
 import Businessman from "../models/Businessman.js";
+import { uploadImage } from "../config/cloudinary.js";
 
 // @desc Register a new user (Customer or Businessman)
 export const signup = async (req, res) => {
   try {
+    console.log('📝 Signup request received');
+    console.log('Body:', req.body);
+    console.log('File:', req.file);
+    
     const {
       role,
       fullname,
@@ -22,6 +27,11 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    // Validate profile picture is required
+    if (!req.file) {
+      return res.status(400).json({ message: "Profile picture is required" });
+    }
+
     // Check if user already exists in their respective collection
     const existingCustomer = await Customer.findOne({ email });
     const existingBusinessman = await Businessman.findOne({ email });
@@ -33,6 +43,17 @@ export const signup = async (req, res) => {
     // Hash password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Handle profile picture upload
+    let profilePictureUrl = '';
+    try {
+      const base64Image = req.file.buffer.toString('base64');
+      const dataURI = `data:${req.file.mimetype};base64,${base64Image}`;
+      profilePictureUrl = await uploadImage(dataURI);
+    } catch (uploadError) {
+      console.error("Error uploading profile picture:", uploadError);
+      return res.status(400).json({ message: "Failed to upload profile picture" });
+    }
+
     let user;
 
     if (role === "customer") {
@@ -43,6 +64,7 @@ export const signup = async (req, res) => {
         age,
         address,
         phone,
+        profilePicture: profilePictureUrl,
       });
     } else if (role === "businessman") {
       user = await Businessman.create({
@@ -52,6 +74,7 @@ export const signup = async (req, res) => {
         companyName,
         address,
         phone,
+        profilePicture: profilePictureUrl,
       });
     } else {
       return res.status(400).json({ message: "Invalid role type" });

@@ -1,0 +1,308 @@
+.view-collection-page {
+  min-height: 100vh;
+  background-color: #000;
+  color: #fff;
+  padding-top: 100px;
+}
+
+.collection-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.collection-heading {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #f6c90e;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.add-car-btn {
+  background-color: #f6c90e;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-car-btn:hover {
+  background-color: #ffdb4d;
+  transform: translateY(-2px);
+}
+
+.car-form-container {
+  background-color: #111;
+  border: 2px solid #f6c90e;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.car-form-container h3 {
+  color: #f6c90e;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.car-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #f6c90e;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  background: #222;
+  color: #fff;
+  border: 1px solid #f6c90e;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ffdb4d;
+}
+
+.file-uploads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.file-upload-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-upload-group label {
+  color: #f6c90e;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.update-hint {
+  color: #2ecc71;
+  font-size: 0.85rem;
+  font-weight: normal;
+}
+
+.file-upload-group small,
+.file-hint {
+  color: #999;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.file-upload-group input[type="file"] {
+  background: #222;
+  color: #fff;
+  border: 1px solid #f6c90e;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.file-preview {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 2px solid #f6c90e;
+}
+
+.submit-btn {
+  background-color: #f6c90e;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #ffdb4d;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.car-card {
+  background-color: #111;
+  border: 2px solid #f6c90e;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(246, 201, 14, 0.3);
+}
+
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 20px;
+}
+
+.car-info h3 {
+  color: #f6c90e;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.car-info p {
+  margin: 8px 0;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.car-info .fare {
+  color: #f6c90e;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.car-info .status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.status.available {
+  background-color: #28a74515;
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.status.unavailable {
+  background-color: #ff000015;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.car-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-btn,
+.delete-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: transparent;
+  color: #f6c90e;
+  border: 1px solid #f6c90e;
+}
+
+.edit-btn:hover {
+  background-color: #f6c90e;
+  color: #000;
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.delete-btn:hover {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.error-message {
+  background: #ff000015;
+  color: #ff6b6b;
+  padding: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #ff6b6b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success-message {
+  background: #00ff0015;
+  color: #2ecc71;
+  padding: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #2ecc71;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .file-uploads {
+    grid-template-columns: 1fr;
+  }
+
+  .cars-grid {
+    grid-template-columns: 1fr;
+  }
+}
