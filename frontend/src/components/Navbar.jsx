@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { getCurrentUser } from "../services/authService";
+import { getCurrentUser, logout } from "../services/authService";
 import "../styles/Customer/Navbar.css";
 
 const Navbar = () => {
@@ -8,11 +8,8 @@ const Navbar = () => {
   const isBusinessman = user?.role === "businessman";
 
   const handleLogout = () => {
-    // Clear auth state and redirect
-    import("../services/authService").then(auth => {
-      auth.logout();
-      navigate("/");
-    });
+    logout();
+    navigate("/");
   };
 
   return (
@@ -23,15 +20,14 @@ const Navbar = () => {
         {isBusinessman ? (
           <>
             <Link to="/business/profile" className="nav-btn">Profile</Link>
-            <Link to="/business/collection" className="nav-btn">My Cars</Link>
-            <Link to="/business/bookings" className="nav-btn">Bookings</Link>
+            <Link to="/business/view-collection" className="nav-btn">My Cars</Link>
+            <Link to="/business/booking-requests" className="nav-btn">Booking Requests</Link>
           </>
         ) : (
           <>
             <Link to="/customer/profile" className="nav-btn">Profile</Link>
-            <Link to="/customer/collection" className="nav-btn">View Collection</Link>
-            <Link to="/customer/booking" className="nav-btn">Make Booking</Link>
-            <Link to="/customer/recharge" className="nav-btn">Recharge</Link>
+            <Link to="/customer/view-collection" className="nav-btn">Browse Cars</Link>
+            <Link to="/customer/history" className="nav-btn">My Bookings</Link>
           </>
         )}
         <button className="nav-btn logout-btn" onClick={handleLogout}>

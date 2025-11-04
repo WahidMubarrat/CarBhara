@@ -6,6 +6,7 @@ import { configureCloudinary } from "./config/cloudinary.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import carRoutes from "./routes/carRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -16,9 +17,10 @@ app.use(cors());
 app.use(express.json());
 
 // Mount routes
-app.use("/api/auth", authRoutes);  // Auth routes (/api/auth/signin, /api/auth/signup)
-app.use("/api/users", userRoutes); // User routes (/api/users/profile)
-app.use("/api/cars", carRoutes);   // Car routes (/api/cars)
+app.use("/api/auth", authRoutes);     // Auth routes (/api/auth/signin, /api/auth/signup)
+app.use("/api/users", userRoutes);    // User routes (/api/users/profile)
+app.use("/api/cars", carRoutes);      // Car routes (/api/cars)
+app.use("/api/bookings", bookingRoutes); // Booking routes (/api/bookings)
 
 app.get("/", (req, res) => {
   res.send("API is running...");

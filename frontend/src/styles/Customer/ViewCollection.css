@@ -13,6 +13,7 @@
 
 .loading-message,
 .error-message,
+.success-message,
 .no-cars-message {
   text-align: center;
   padding: 2rem;
@@ -28,6 +29,25 @@
   background-color: #ff000015;
   border: 1px solid #ff6b6b;
   border-radius: 8px;
+}
+
+.success-message {
+  color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .no-cars-message {

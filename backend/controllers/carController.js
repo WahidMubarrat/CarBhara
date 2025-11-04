@@ -297,7 +297,7 @@ export const getAvailableCars = async (req, res) => {
     }
 
     const cars = await Car.find({ isAvailable: true })
-      .populate('businessmanId', 'name phone email')
+      .populate('businessmanId', 'fullname phone email address')
       .sort({ createdAt: -1 });
 
     res.json({

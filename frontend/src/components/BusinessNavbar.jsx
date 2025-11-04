@@ -1,15 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Businessman/BusinessNavbar.css";
+import { logout } from "../services/authService";
+import "../styles/Business/BusinessNavbar.css";
 
 const BusinessNavbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear auth state and redirect
-    import("../services/authService").then(auth => {
-      auth.logout();
-      navigate("/");
-    });
+    logout();
+    navigate("/");
   };
 
   return (
@@ -23,11 +21,11 @@ const BusinessNavbar = () => {
         <Link to="/business/profile" className="business-nav-btn">
           Profile
         </Link>
-        <Link to="/business/collection" className="business-nav-btn">
+        <Link to="/business/view-collection" className="business-nav-btn">
           My Cars
         </Link>
-        <Link to="/business/bookings" className="business-nav-btn">
-          Booking Requests
+        <Link to="/business/booking-history" className="business-nav-btn">
+          Bookings
         </Link>
         <button 
           className="business-nav-btn logout-btn" 

@@ -7,7 +7,9 @@ const CarCard = ({
   onDelete, 
   showActions = false, 
   onClick,
-  onDeleteDocument
+  onDeleteDocument,
+  onBook,
+  userRole
 }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [enlargedImage, setEnlargedImage] = useState(null);
@@ -37,6 +39,19 @@ const CarCard = ({
           <p className={`status ${car.isAvailable ? 'available' : 'unavailable'}`}>
             {car.isAvailable ? 'Available' : 'Unavailable'}
           </p>
+          
+          {/* Book button for customers */}
+          {userRole === 'customer' && car.isAvailable && onBook && (
+            <button 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                onBook(car); 
+              }} 
+              className="book-btn"
+            >
+              Book Now
+            </button>
+          )}
           
           {showActions && (
             <div className="car-actions">
@@ -85,7 +100,17 @@ const CarCard = ({
                 <p><strong>Phone:</strong> {car.driverPhone}</p>
               </div>
 
-              {/* Pricing */}
+              {/* Car Owner Information */}
+                {car.businessmanId && (
+                  <div className="modal-section">
+                    <h3>Car Owner</h3>
+                    <p><strong>Name:</strong> {car.businessmanId.fullname}</p>
+                    <p><strong>Phone:</strong> {car.businessmanId.phone}</p>
+                    {car.businessmanId.address && (
+                      <p><strong>Address:</strong> {car.businessmanId.address}</p>
+                    )}
+                  </div>
+                )}              {/* Pricing */}
               <div className="modal-section">
                 <h3>Pricing</h3>
                 <p className="modal-fare">৳{car.hourlyFare} per hour</p>

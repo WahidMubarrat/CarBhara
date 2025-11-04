@@ -9,14 +9,12 @@ import SignUp from "./pages/SignUp";
 // Customer pages
 import Profile from "./pages/customer/Profile";
 import ViewCollection from "./pages/customer/ViewCollection";
-import MakeBooking from "./pages/customer/MakeBooking";
-import Recharge from "./pages/customer/Recharge";
+import BookingHistory from "./pages/customer/BookingHistory";
 
 // Business pages
 import BusinessProfile from "./pages/business/BusinessProfile";
 import BusinessViewCollection from "./pages/business/ViewCollection";
-import BusinessCars from "./pages/business/BusinessCars";
-import BusinessBookings from "./pages/business/BusinessBookings";
+import BusinessBookingHistory from "./pages/business/BusinessBookingHistory";
 
 function App() {
   return (
@@ -36,7 +34,7 @@ function App() {
         } 
       />
       <Route 
-        path="/customer/collection" 
+        path="/customer/view-collection" 
         element={
           <ProtectedRoute allowedRole="customer">
             <ViewCollection />
@@ -44,18 +42,10 @@ function App() {
         } 
       />
       <Route 
-        path="/customer/booking" 
+        path="/customer/history" 
         element={
           <ProtectedRoute allowedRole="customer">
-            <MakeBooking />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/customer/recharge" 
-        element={
-          <ProtectedRoute allowedRole="customer">
-            <Recharge />
+            <BookingHistory />
           </ProtectedRoute>
         } 
       />
@@ -70,7 +60,7 @@ function App() {
         } 
       />
       <Route 
-        path="/business/collection" 
+        path="/business/view-collection" 
         element={
           <ProtectedRoute allowedRole="businessman">
             <BusinessViewCollection />
@@ -78,18 +68,10 @@ function App() {
         } 
       />
       <Route 
-        path="/business/cars" 
+        path="/business/booking-history" 
         element={
           <ProtectedRoute allowedRole="businessman">
-            <BusinessCars />
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
-        path="/business/bookings" 
-        element={
-          <ProtectedRoute allowedRole="businessman">
-            <BusinessBookings />
+            <BusinessBookingHistory />
           </ProtectedRoute>
         } 
       />

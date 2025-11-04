@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import BusinessNavbar from "../../components/BusinessNavbar";
 import ChangePassword from "../../components/ChangePassword";
-import "../../styles/Businessman/BusinessProfile.css";
+import "../../styles/Business/BusinessProfile.css";
 import { getUserProfile, updateUserProfile } from "../../services/userService";
 
 const BusinessProfile = () => {
