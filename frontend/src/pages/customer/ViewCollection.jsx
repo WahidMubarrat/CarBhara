@@ -4,7 +4,7 @@ import CarCard from "../../components/CarCard";
 import BookingModal from "../../components/BookingModal";
 import { getAvailableCars } from "../../services/carService";
 import { createBooking } from "../../services/bookingService";
-import "../../styles/customer/ViewCollection.css";
+import "../../styles/Customer/ViewCollection.css";
 
 const ViewCollection = () => {
   const [cars, setCars] = useState([]);
