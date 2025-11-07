@@ -25,6 +25,10 @@ build/
 .env.test.local
 .env.production.local
 
+# Uploads (since using Cloudinary)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
 # Testing
 /coverage
 *.lcov
