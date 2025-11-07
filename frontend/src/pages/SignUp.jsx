@@ -94,12 +94,14 @@ const SignUp = () => {
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-box">
-        <h1 className="signup-title">Create Your Account</h1>
-        <p className="signup-subtitle">Join CarBhara today</p>
+    <>
+      <div className="signup-background"></div>
+      <div className="signup-container">
+        <div className="signup-box">
+          <h1 className="signup-title">Create Your Account</h1>
+          <p className="signup-subtitle">Join CarBhara today</p>
 
-        <form className="signup-form" onSubmit={handleSubmit}>
+          <form className="signup-form" onSubmit={handleSubmit}>
           {error && <div className="form-error">{error}</div>}
 
           <div className="profile-picture-section">
@@ -216,6 +218,7 @@ const SignUp = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

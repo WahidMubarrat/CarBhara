@@ -8,14 +8,15 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 1rem 0;
+  /* move navbar slightly higher by reducing vertical padding */
+  padding: 0.5rem 0;
 }
 
 .navbar-brand {
   color: white;
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 

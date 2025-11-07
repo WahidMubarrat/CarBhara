@@ -150,6 +150,7 @@
 /* Firefox - hide number input arrows */
 .booking-modal input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Date time picker styling */
